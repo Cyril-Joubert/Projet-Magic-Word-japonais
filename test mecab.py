@@ -105,7 +105,7 @@ FreqSans = wordFreq(tabNorm)
 
     #ici on envoie le dictionnaire dans un fichier, c'est la forme finale de notre code.
 closeExport(FormeFinalKanji.txt)
-closeExport(FormeFinalKanji.txt)
+closeExport(FormeFinal.txt)
 
 
 # problème : 3 premières entrées sont les dernières
