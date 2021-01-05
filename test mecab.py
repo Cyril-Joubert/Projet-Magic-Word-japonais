@@ -33,32 +33,47 @@ print(dump.parse("食べさされやすくなさそうでしたり"))	# 38 599
 import MeCab
 from mergeSort import * # récupère les fonctions merge et mergesort
 
-tab = []	# tableau taberu
+############ ouvrir norm #############
+
+tabKanji = tabNorm = [] #tableau contenant les formes du corpus à analyser.
+tab = []    # tableau taberu
 tabFr = []	# tableau des fréquences détaillés 
-fr = []		# tableau de transition pour le split
-nb = []		# tableau des fréquences finales
-smolList = [] #tableau de tuple pour utiliser l'algorithme de tri
+
+############ wordFreq #############
+
+FreqKanji = FreqSans = [] # 2 tableaux pour lister les fréquences. 
+fr = []     # tableau de transition pour le split
+nb = []     # tableau des fréquences finales
+smol = [] #tableau de tuple pour utiliser l'algorithme de tri
+
+
+handle = "" #string qui permet de mettre le nom du fichier à ouvrir ou à fermer/exporter
 
 '''fonction qui permet d'ouvrir les fichier contenant les formes et enlève les \n 
     il prend en entrée le nom du fichier à ouvrir, donne en sortie le tableau contenant une forme par ligne'''
 def ouvrirNorm(handle):
+
+    lineNorm = "" #String pour contenir chaque ligne 
     # On stock les formes de taberu en enlevant les \n
-    with open( handle, "r", encoding="utf-8") as f:
+    with open(handle, "r", encoding="utf-8") as f:
         for line in f:
             if line != "\n":
                 lineNorm = line.strip("\n")
                 if lineNorm not in tab: # structure conditionnelle pour supprimer les doublons
                     tab.append(lineNorm)
+    f.close()
     return tab
 
 ''' fonction qui prend en entrée, le nom du fichier qui contiendra la sortie et le dictionnaire forme-fréquence
     elle permet d'exporter nos données dans un fichier.
 '''
+
 def closeExport(handle, smol):
     # On concatène les formes(clé) et les fréquences(valeur) dans un fichier taberuFinal.txt séparé par une tabulation et on les tris par ordre décroissant
     with open (handle, "w", encoding="utf-8") as f:
         for i, j in sorted(smol.items(), key=lambda t: t[1], reverse=True):
             f.write(i + "   " + j)
+    f.close()
     return
 
 
@@ -82,6 +97,7 @@ def wordFreq(tableau):
     return smol
 
 
+
 ##############  PYTHON #################
 # #On créé une liste de tuple à partir du dictionnaire pour pouvoir y appliquer un MergeSort
 # smolList = list(smol.items())
@@ -94,7 +110,6 @@ def wordFreq(tableau):
 #######################################
 
 
-
     #Ici, on ouvre les 2 textes qui contenaient les entrée avec et sans Kanji.
 tabKanji = ouvrirNorm("taberu1Kanji.txt")
 tabNorm = ouvrirNorm("taberu1.txt")
@@ -104,8 +119,7 @@ FreqKanji = wordFreq(tabKanji)
 FreqSans = wordFreq(tabNorm) 
 
     #ici on envoie le dictionnaire dans un fichier, c'est la forme finale de notre code.
-closeExport(FormeFinalKanji.txt)
-closeExport(FormeFinal.txt)
-
+closeExport("FormeFinalKanji.txt", smol)
+closeExport("FormeFinal.txt", smol)
 
 # problème : 3 premières entrées sont les dernières
