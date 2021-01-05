@@ -17,7 +17,10 @@ import io
 
 # print(dictionnary)
 
-# merge Assending
+'''
+Fonction Croissante et Décroissante qui trie la sortie de MergeSort croissante ou descroissante, prend en entrée 2 tables left et right
+donne en sortie le tableau merged tableau ordoné
+'''
 def mergeAsc(left, right):
 	merged = [] #final output array
 	leftIndex, rightIndex = 0, 0 
@@ -64,6 +67,12 @@ def mergeDesc(left, right):
 # b = [2,4,6]
 # print(mergeDesc(a,b))
 
+
+'''
+Fonction récursive qui divise la liste en 2 jusqu'à ce qu'il n'y ai plus que 2 items et avec la fonction merge les trie dans l'ordre 
+prend en entrée la table à trier et appelle en sortie la fonction merge.
+'''
+
 def mergeSortAsc(table): #mergesort ascending
 
 	#if table is a list of zeo or one element is sorted, by definition. So we return the table as is
@@ -80,7 +89,7 @@ def mergeSortAsc(table): #mergesort ascending
 
 def mergeSortDesc(table): #mergesort descending
 
-	#if table is a list of zeo or one element is sorted, by definition. So we return the table as is
+	#if table is a list of zero or one element is sorted, by definition. So we return the table as is
 	if len(table) <= 1:
 		return table
 	
@@ -91,6 +100,7 @@ def mergeSortDesc(table): #mergesort descending
 
 	#merge the 2 sorted parts
 	return mergeDesc(left, right)
+
 
 
 # results = mergeSortDesc(dictionnary)
