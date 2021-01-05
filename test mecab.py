@@ -31,11 +31,13 @@ print(dump.parse("食べさされやすくなさそうでしたり"))	# 38 599
 
 
 import MeCab
+from mergeSort import * # récupère les fonctions merge et mergesort
 
 tab = []	# tableau taberu
 tabFr = []	# tableau des fréquences détaillés 
 fr = []		# tableau de transition pour le split
 nb = []		# tableau des fréquences finales
+smolList = [] #tableau de tuple pour utiliser l'algorithme de tri
 smol = {}	# tableau associatif pour la structure finale
 
 # On stock les formes de taberu en enlevant les \n
@@ -46,7 +48,6 @@ with open("taberu1Kanji.txt", "r", encoding="utf-8") as f:
             if lineNorm not in tab: # structure conditionnelle pour supprimer les doublons
                 tab.append(lineNorm)
 	
-
 """
 # génère un fichier avec seulement les formes de taberu
 with open ("taberu1.txt", "w", encoding="utf-8") as f:
@@ -65,6 +66,19 @@ for i in range (0, len(tab)-1):
 for i in range(0, len(tab)-1):
     if tab[i] not in smol:
         smol.update({tab[i]: nb[i]})
+
+
+##############  PYTHON #################
+# #On créé une liste de tuple à partir du dictionnaire pour pouvoir y appliquer un MergeSort
+# smolList = list(smol.items())
+# print(smolList)
+# #On utilise un algorithme de tri de type mergeSort pour trier toutes fréquences par ordre décroissant
+
+# result = mergeSortDesc(smolList)
+# # print(result)
+
+#######################################
+
 
 # On concatène les formes(clé) et les fréquences(valeur) dans un fichier taberuFinal.txt séparé par une tabulation et on les tris par ordre décroissant
 with open ("FormeFinalKanji.txt", "w", encoding="utf-8") as f:
